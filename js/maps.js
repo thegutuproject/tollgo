@@ -47,13 +47,7 @@ function initializeMap() {
     var map = new google.maps.Map(mapDiv, mapOptions);
     directionsDisplay.setMap(map);
 
-}
 
-google.maps.event.addDomListener(window, "load", initializeMap());
-
-document.getElementById("directionRequests").onsubmit = function() {
-    var start = document.getElementById("departure").value;
-    var end = document.getElementById("arrival").value;
     var request = {
         origin:siberia,
         destination:newyork,
@@ -72,4 +66,7 @@ document.getElementById("directionRequests").onsubmit = function() {
             // });
         }
     });
+
 }
+
+google.maps.event.addDomListener(window, "load", initializeMap());
