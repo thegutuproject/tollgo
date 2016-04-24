@@ -6,32 +6,37 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 
 </head>
+
 <body style="width:100%; height:100%;">
 
-<div id="input">
-	<form id="directionRequests">
-		Starting Address:<br>
-		<input id="departure" type="text" name="starting"><br>
-		Ending Address:<br>
-		<input id="arrival" type="text" name="ending">
-		<input type="button" value="Get Directions" onclick="getDirections();">
-	</form>
-	<div id="directions"></div>
-</div>
+	<div id="input">
+		<p align="center"><img src="raw/tollgologo.png" alt="TollGO" style="width:304px;height:228px;"><img></p>
+		<form id="directionRequests">
+			<p align="center" >Starting Address:</p><br>
+			<p align="center"><input id="departure" type="text" name="starting"></p><br>
+			<p align="center">Ending Address:</p><br>
+			<p align="center"><input id="arrival" type="text" name="ending"></p>
+			<p align="center"><input type="button" value="Get Directions" onclick="getDirections();"></p>
+		</form>
 
-<div id="googleMap">
+		<div id="directions">
 
-</div>
+		</div>
+	</div>
 
-<script src="./js/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-hoxxDANCV78fCxIm4IGvbwVIL3iSTC8"></script>
-<script src="./js/maps.js"></script>
+	<div id="googleMap">
 
-<script>
-	$.getJSON("./toll.json", function(json) {
-		console.log(json); // this will show the info it in firebug console
-	});
-</script>
+	</div>
+
+	<script src="./js/jquery-2.2.3.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-hoxxDANCV78fCxIm4IGvbwVIL3iSTC8"></script>
+	<script src="./js/maps.js"></script>
+
+	<script>
+		$.getJSON("./toll.json", function(json) {
+			console.log(json); // this will show the info it in firebug console
+		});
+	</script>
 
 </body>
 </html>
