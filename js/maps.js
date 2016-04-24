@@ -120,8 +120,6 @@ function getToll()
             {
 
                 matchedTolls.push(ourArray[i]);
-
-                console.log("Worked bitches");
             }
         }
     }
@@ -159,9 +157,9 @@ $.getJSON("./toll.json", function(json) {
         var exitIdReturned = json.interchange.interchanges[i].exitid;
         var routeReturned = json.interchange.interchanges[i].route;
 
+        console.log(exitIdReturned);
+
         var newInterchange = new InterchangeObject(latitudeReturned, longitudeReturned, descriptionReturned, routeIdReturned, milepostReturned, typeReturned, exitIdReturned, routeReturned);
         ourArray.push(newInterchange);
     }
-
-    console.log(ourArray.length);
 });
