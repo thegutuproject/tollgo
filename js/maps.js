@@ -114,10 +114,21 @@ function getToll()
         var lattitude2 = latArray[x-1];
         var longitude2 = lngArray[x-1];
 
-        if (lattitude1 < tollLat && lattitude2 > tollLat && longitude1 < tollLng && longitude2 > tollLng)
+        for (var i = 0; i < ourArray.length; i++)
         {
-            console.log("Worked bitches");
+            if (lattitude1 < ourArray[i].lat && lattitude2 > ourArray[i].lat && longitude1 < ourArray[i].long && longitude2 > ourArray[i].long)
+            {
+
+                matchedTolls.push(ourArray[i]);
+
+                console.log("Worked bitches");
+            }
         }
+    }
+
+    for (var k = 0; k < matchedTolls.length; k++)
+    {
+        console.log(matchedTolls[k]);
     }
 }
 
@@ -135,6 +146,7 @@ var InterchangeObject = function(lat, long, desc, routeid, milepost, type, exiti
 }
 
 var ourArray = [];
+var matchedTolls = [];
 
 $.getJSON("./toll.json", function(json) {
     for(var i = 0; i < json.interchange.interchanges.length; i++) {
