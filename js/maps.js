@@ -122,5 +122,7 @@ function getToll()
 }
 
 $.getJSON("./toll.json", function(json) {
-    console.log(json); // this will show the info it in firebug console
+    for(var i = 0; i < json.interchange.interchanges.length; i++) {
+        console.log(json.interchange.interchanges[i].latitude, json.interchange.interchanges[i].longitude);
+    }
 });
