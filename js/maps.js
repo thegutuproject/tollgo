@@ -10,6 +10,10 @@ var browserSupportFlag =  new Boolean();
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 
+var map;
+var latArray = [];
+var lngArray = [];
+
 var mapDiv = document.getElementById('googleMap');
 
 function initializeMap() {
@@ -44,22 +48,28 @@ function initializeMap() {
         zoom: 15
     };
 
-    var map = new google.maps.Map(mapDiv, mapOptions);
+    map = new google.maps.Map(mapDiv, mapOptions);
     directionsDisplay.setMap(map);
 
+}
 
+google.maps.event.addDomListener(window, "load", initializeMap());
+
+document.getElementById("departure").focus();
+
+function getDirections() {
+    var start = document.getElementById("departure").value;
+    var end = document.getElementById("arrival").value;
+    
     var request = {
-        origin:siberia,
-        destination:newyork,
+        origin:start,
+        destination:end,
         travelMode: google.maps.TravelMode.DRIVING
     };
-    console.log("prior to request");
-    console.log(request);
     directionsService.route(request, function(result, status) {
-        alert(status);
         if (status == google.maps.DirectionsStatus.OK) {
             directionsDisplay.setDirections(result);
-
+            getCoordinates(result);
             // new google.maps.DirectionsRenderer({
             //     map: map,
             //     directions: result
@@ -67,6 +77,22 @@ function initializeMap() {
         }
     });
 
+
 }
 
-google.maps.event.addDomListener(window, "load", initializeMap());
+function getCoordinates(result) {
+    var currentRouteArray = result.routes[0];  //Returns a complex object containing the results of the current route
+    var currentRoute = currentRouteArray.overview_path; //Returns a simplified version of all the coordinates on the path
+
+
+    obj_newPolyline = new google.maps.Polyline({ map: map }); //a polyline just to verify my code is fetching the coordinates
+    var path = obj_newPolyline.getPath();
+    for (var x = 0; x < currentRoute.length; x++) {
+        var pos = new google.maps.LatLng(currentRoute[x].kb, currentRoute[x].lb)
+        latArray[x] = currentRoute[x].lat(); //Returns the latitude
+        lngArray[x] = currentRoute[x].lng(); //Returns the longitude
+        console.log(currentRoute[x].lat());
+        console.log(currentRoute[x].lng());
+        path.push(pos);
+    }
+}
