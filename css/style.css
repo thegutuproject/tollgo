@@ -31,6 +31,10 @@ html, body, #googleMap {
 /*background = border.png;*/
 /*}*/
 
+#arrival, #departure {
+	color: black;
+}
+
 #top{
 	height: 50%;
 	/*background-color: #009BFF;*/

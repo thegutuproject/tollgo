@@ -203,6 +203,10 @@ function getTollCost() {
 
             var change = tollArray[xAxis][yAxis];
             console.log(change);
+
+            var changeDue = document.getElementById('bottom')
+            changeDue.innerHTML = changeDue.innerHTML + change;
+
         }
     }
 }
