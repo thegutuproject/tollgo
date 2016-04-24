@@ -3,34 +3,59 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="./css/linStyle.css">
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap-responsive.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css.map">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css.map">
 
 </head>
 
 <body style="width:100%; height:100%;">
 
-	<div id="input">
-		<p align="center"><img src="raw/tollgologo.png" alt="TollGO" style="width:304px;height:228px;"><img></p>
+<div id="input">
+	<div id="top" >
+		<p align="center">
+			<img id="logo" src="raw/tollgologo-1.png" alt="TollGO" style="width:250px;height:150px;"><img>
+		</p>
 		<form id="directionRequests">
-			<p align="center" >Starting Address:</p><br>
-			<p align="center"><input id="departure" type="text" name="starting"></p><br>
-			<p align="center">Ending Address:</p><br>
-			<p align="center"><input id="arrival" type="text" name="ending"></p>
-			<p align="center"><input type="button" value="Get Directions" onclick="getDirections();"></p>
+			<p align="center" id="text">
+				Starting Address:
+				<br>
+				<input id="departure" type="text" name="starting">
+				<br>
+				<br>
+				Ending Address:
+				<br>
+				<input id="arrival" type="text" name="ending">
+				<br>
+				<br>
+				<button id="button" type="button" class="btn btn-primary btn-lg btn-block" onclick="getDirections();">Get Toll Prices</button>
+			</p>
 		</form>
-
-		<div id="directions">
-
-		</div>
 	</div>
-
-	<div id="googleMap">
-
+	<div id="bottom">
+		<p align="center" id="text2">
+			Total Cost is:
+		</p>
 	</div>
+</div>
 
-	<script src="./js/jquery-2.2.3.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-hoxxDANCV78fCxIm4IGvbwVIL3iSTC8"></script>
-	<script src="./js/maps.js"></script>
+<div id="googleMap">
+
+</div>
+
+<script src="./js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-hoxxDANCV78fCxIm4IGvbwVIL3iSTC8"></script>
+<script src="./js/maps.js"></script>
+
+<script>
+	$.getJSON("./toll.json", function(json) {
+		console.log(json); // this will show the info it in firebug console
+	});
+</script>
 
 </body>
 </html>

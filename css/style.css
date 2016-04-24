@@ -16,3 +16,38 @@ html, body, #googleMap {
 	height: 100%;
 	float: left;
 }
+
+#text{
+	/*color: #003bb3;*/
+	color: #FFFFFF;
+	font-family: Geneva;
+}
+#text2{
+	color: #009BFF;
+	font-family: Geneva;
+	padding-top: 30%;
+}
+/*#input{*/
+/*background = border.png;*/
+/*}*/
+
+#top{
+	height: 50%;
+	/*background-color: #009BFF;*/
+	background-color: #0078ce;
+}
+
+#bottom{
+	height: 50%;
+}
+
+#button{
+	padding: 18px 28px;
+	font-size: 22px;
+	border-radius: 8px;
+	background-color: #009BFF;
+}
+
+#logo {
+	border: none;
+}
