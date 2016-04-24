@@ -182,10 +182,16 @@ function getTollCost() {
  type:"Interchange"
  */
 
+    var changeDue = document.getElementById('text2')
+    var tollPrice;
     // myTollsArray
 
     if (matchedTolls.length == 0) {
         console.log("no tolls fucks");
+        tollPrice = "No Tolls";
+
+        changeDue.innerHTML = changeDue.innerHTML + tollPrice;
+
     } else {
         setFirstExitID();
 
@@ -193,7 +199,7 @@ function getTollCost() {
         var lastExitID = matchedTolls[lastNumberOfTolls-1].exitid;
 
         if(startingExitId >= 1 && lastExitID <= 15) {
-            console.log("no tolls")
+            changeDue = 0;
         } else {
             var xAxis = changeValue(lastExitID);
             var yAxis = changeValue(startingExitId);
@@ -204,8 +210,8 @@ function getTollCost() {
             var change = tollArray[xAxis][yAxis];
             console.log(change);
 
-            var changeDue = document.getElementById('bottom')
-            changeDue.innerHTML = changeDue.innerHTML + change;
+            changeDue = document.getElementById('text2')
+            changeDue.innerHTML = changeDue.innerHTML + "$" + change;
 
         }
     }
