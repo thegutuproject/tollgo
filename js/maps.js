@@ -121,8 +121,35 @@ function getToll()
     }
 }
 
+var InterchangeObject = function(lat, long, desc, routeid, milepost, type, exitid, route) {
+    this.lat = lat;
+    this.long = long;
+    this.desc = desc;
+    this.routeid = routeid;
+    this.milepost = milepost;
+    this.type = type;
+    this.exitid = exitid;
+    this.route = route;
+
+    console.log("object created");
+}
+
+var ourArray = [];
+
 $.getJSON("./toll.json", function(json) {
     for(var i = 0; i < json.interchange.interchanges.length; i++) {
-        console.log(json.interchange.interchanges[i].latitude, json.interchange.interchanges[i].longitude);
+        var latitudeReturned = json.interchange.interchanges[i].latitude;
+        var longitudeReturned = json.interchange.interchanges[i].longitude;
+        var descriptionReturned = json.interchange.interchanges[i].description;
+        var routeIdReturned = json.interchange.interchanges[i].routeid;
+        var milepostReturned = json.interchange.interchanges[i].milepost;
+        var typeReturned = json.interchange.interchanges[i].type;
+        var exitIdReturned = json.interchange.interchanges[i].exitid;
+        var routeReturned = json.interchange.interchanges[i].route;
+
+        var newInterchange = new InterchangeObject(latitudeReturned, longitudeReturned, descriptionReturned, routeIdReturned, milepostReturned, typeReturned, exitIdReturned, routeReturned);
+        ourArray.push(newInterchange);
     }
+
+    console.log(ourArray.length);
 });
