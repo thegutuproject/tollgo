@@ -167,7 +167,7 @@ $.getJSON("./toll.json", function(json) {
 
 var startingExitId;
 function setFirstExitID() {
-    startingExitId = ourArray[0].exitid;
+    startingExitId = matchedTolls[0].exitid;
 }
 
 function getTollCost() {
@@ -190,7 +190,7 @@ function getTollCost() {
         console.log("no tolls fucks");
         tollPrice = "No Tolls";
 
-        changeDue.innerHTML = changeDue.innerHTML + tollPrice;
+        changeDue.innerHTML = "Total Cost is: " + tollPrice;
 
     } else {
         setFirstExitID();
@@ -211,7 +211,7 @@ function getTollCost() {
             console.log(change);
 
             changeDue = document.getElementById('text2')
-            changeDue.innerHTML = changeDue.innerHTML + "$" + change;
+            changeDue.innerHTML = "Total Cost is: " + change;
 
         }
     }
