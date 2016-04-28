@@ -101,7 +101,25 @@ function getCoordinates(result) {
         path.push(pos);
     }
 
+    testingIsLocationOnEdge(obj_newPolyline);
     getToll();
+}
+
+function testingIsLocationOnEdge(polyLine)
+{
+    var isLocationNear = false;
+
+    console.log(isLocationNear);
+
+    for (var i = 0; i < interchangeArray.length; i++)
+    {
+        var myLatLng = new google.maps.LatLng({lat: interchangeArray[i].lat, lng: interchangeArray[i].long});
+        console.log(myLatLng);
+        isLocationNear = google.maps.geometry.poly.isLocationOnEdge(myLatLng, polyLine, .5);
+        console.log(isLocationNear);
+    }
+
+
 }
 
 function getToll()
@@ -134,14 +152,16 @@ function getToll()
 }
 
 function InterchangeObject(lat, long, routeid, milepost, type, exitid, desc, route) {
-    this.lat = lat;
-    this.long = long;
+    this.lat = Number(lat);
+    this.long = Number(long);
     this.routeid = routeid;
     this.milepost = milepost;
     this.type = type;
     this.exitid = exitid;
     this.desc = desc;
     this.route = route;
+
+    console.log(this);
 }
 
 var interchangeArray = [];
@@ -169,16 +189,6 @@ function setFirstExitID() {
 }
 
 function getTollCost() {
-/*
- desc:"Pembroke - Medina - NY Route 77"
- exitid:"48A"
- lat:"43.00281"
- long:"-78.41385"
- milepost:"401.72"
- route:"I-90 - NYS Thruway"
- routeid:"ML"
- type:"Interchange"
- */
 
     var changeDue = document.getElementById('text2')
     var tollPrice;
