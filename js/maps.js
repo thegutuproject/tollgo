@@ -81,8 +81,6 @@ function getDirections() {
             // });
         }
     });
-
-
 }
 
 function getCoordinates(result) {
@@ -116,12 +114,12 @@ function getToll()
         var lattitude2 = latArray[x-1];
         var longitude2 = lngArray[x-1];
 
-        for (var i = 0; i < ourArray.length; i++)
+        for (var i = 0; i < interchangeArray.length; i++)
         {
-            if (lattitude1 < ourArray[i].lat && lattitude2 > ourArray[i].lat && longitude1 < ourArray[i].long && longitude2 > ourArray[i].long)
+            if (lattitude1 < interchangeArray[i].lat && lattitude2 > interchangeArray[i].lat && longitude1 < interchangeArray[i].long && longitude2 > interchangeArray[i].long)
             {
 
-                matchedTolls.push(ourArray[i]);
+                matchedTolls.push(interchangeArray[i]);
             }
         }
     }
@@ -135,33 +133,33 @@ function getToll()
     getTollCost()
 }
 
-var InterchangeObject = function(lat, long, desc, routeid, milepost, type, exitid, route) {
+function InterchangeObject(lat, long, routeid, milepost, type, exitid, desc, route) {
     this.lat = lat;
     this.long = long;
-    this.desc = desc;
     this.routeid = routeid;
     this.milepost = milepost;
     this.type = type;
     this.exitid = exitid;
+    this.desc = desc;
     this.route = route;
 }
 
-var ourArray = [];
+var interchangeArray = [];
 var matchedTolls = [];
 
 $.getJSON("./toll.json", function(json) {
     for(var i = 0; i < json.interchange.interchanges.length; i++) {
         var latitudeReturned = json.interchange.interchanges[i].latitude;
         var longitudeReturned = json.interchange.interchanges[i].longitude;
-        var descriptionReturned = json.interchange.interchanges[i].description;
         var routeIdReturned = json.interchange.interchanges[i].routeid;
         var milepostReturned = json.interchange.interchanges[i].milepost;
         var typeReturned = json.interchange.interchanges[i].type;
         var exitIdReturned = json.interchange.interchanges[i].exitid;
+        var descriptionReturned = json.interchange.interchanges[i].description;
         var routeReturned = json.interchange.interchanges[i].route;
 
-        var newInterchange = new InterchangeObject(latitudeReturned, longitudeReturned, descriptionReturned, routeIdReturned, milepostReturned, typeReturned, exitIdReturned, routeReturned);
-        ourArray.push(newInterchange);
+        var newInterchange = new InterchangeObject(latitudeReturned, longitudeReturned, routeIdReturned, milepostReturned, typeReturned, exitIdReturned, descriptionReturned, routeReturned);
+        interchangeArray.push(newInterchange);
     }
 });
 
