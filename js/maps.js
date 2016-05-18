@@ -55,7 +55,6 @@ function initializeMap() {
 
     map = new google.maps.Map(mapDiv, mapOptions);
     directionsDisplay.setMap(map);
-
 }
 
 google.maps.event.addDomListener(window, "load", initializeMap());
@@ -63,8 +62,11 @@ google.maps.event.addDomListener(window, "load", initializeMap());
 document.getElementById("departure").focus();
 
 function getDirections() {
-    var start = document.getElementById("departure").value;
-    var end = document.getElementById("arrival").value;
+    // var start = document.getElementById("departure").value;
+    // var end = document.getElementById("arrival").value;
+
+    var start = document.getElementById("departure").value = "14623";
+    var end = document.getElementById("arrival").value = "14260"
     
     var request = {
         origin:start,
@@ -102,54 +104,54 @@ function getCoordinates(result) {
     }
 
     testingIsLocationOnEdge(obj_newPolyline);
-    getToll();
+    // getToll();
 }
 
 function testingIsLocationOnEdge(polyLine)
 {
     var isLocationNear = false;
-
-    console.log(isLocationNear);
+    var myLatLng;
 
     for (var i = 0; i < interchangeArray.length; i++)
     {
-        var myLatLng = new google.maps.LatLng({lat: interchangeArray[i].lat, lng: interchangeArray[i].long});
-        console.log(myLatLng);
-        isLocationNear = google.maps.geometry.poly.isLocationOnEdge(myLatLng, polyLine, .5);
-        console.log(isLocationNear);
-    }
-
-
-}
-
-function getToll()
-{
-    for (var x = 1; x < latArray.length ; x++)
-    {
-        var lattitude1 = latArray[x];
-        var longitude1 = lngArray[x];
-
-        var lattitude2 = latArray[x-1];
-        var longitude2 = lngArray[x-1];
-
-        for (var i = 0; i < interchangeArray.length; i++)
+        myLatLng = new google.maps.LatLng({lat: interchangeArray[i].lat, lng: interchangeArray[i].long});
+        isLocationNear = google.maps.geometry.poly.isLocationOnEdge(myLatLng, polyLine, .0005);
+        if (isLocationNear == true)
         {
-            if (lattitude1 < interchangeArray[i].lat && lattitude2 > interchangeArray[i].lat && longitude1 < interchangeArray[i].long && longitude2 > interchangeArray[i].long)
-            {
-
-                matchedTolls.push(interchangeArray[i]);
-            }
+            console.log(interchangeArray[i]);
+            matchedTolls.push(interchangeArray[i]);
         }
     }
-
-    // for (var k = 0; k < matchedTolls.length; k++)
-    // {
-    //     console.log("HERE");
-    //     console.log(matchedTolls[k]);
-    // }
-
-    getTollCost()
+    getTollCost();
 }
+
+// function getToll()
+// {
+//     for (var x = 1; x < latArray.length ; x++)
+//     {
+//         var lattitude1 = latArray[x];
+//         var longitude1 = lngArray[x];
+//
+//         var lattitude2 = latArray[x-1];
+//         var longitude2 = lngArray[x-1];
+//
+//         for (var i = 0; i < interchangeArray.length; i++)
+//         {
+//             if (lattitude1 < interchangeArray[i].lat && lattitude2 > interchangeArray[i].lat && longitude1 < interchangeArray[i].long && longitude2 > interchangeArray[i].long)
+//             {
+//                 matchedTolls.push(interchangeArray[i]);
+//             }
+//         }
+//     }
+//
+//     // for (var k = 0; k < matchedTolls.length; k++)
+//     // {
+//     //     console.log("HERE");
+//     //     console.log(matchedTolls[k]);
+//     // }
+//
+//     getTollCost()
+// }
 
 function InterchangeObject(lat, long, routeid, milepost, type, exitid, desc, route) {
     this.lat = Number(lat);
@@ -160,8 +162,6 @@ function InterchangeObject(lat, long, routeid, milepost, type, exitid, desc, rou
     this.exitid = exitid;
     this.desc = desc;
     this.route = route;
-
-    console.log(this);
 }
 
 var interchangeArray = [];
@@ -184,31 +184,39 @@ $.getJSON("./toll.json", function(json) {
 });
 
 var startingExitId;
-function setFirstExitID() {
+function setFirstExitID()
+{
     startingExitId = matchedTolls[0].exitid;
 }
 
-function getTollCost() {
+function getTollCost()
+{
 
     var changeDue = document.getElementById('text2')
     var tollPrice;
     // myTollsArray
 
-    if (matchedTolls.length == 0) {
+    if (matchedTolls.length == 0)
+    {
         console.log("no tolls fucks");
         tollPrice = "No Tolls";
 
         changeDue.innerHTML = "Total Cost is: " + tollPrice;
 
-    } else {
+    }
+    else
+    {
         setFirstExitID();
 
         var lastNumberOfTolls = matchedTolls.length;
         var lastExitID = matchedTolls[lastNumberOfTolls-1].exitid;
 
-        if(startingExitId >= 1 && lastExitID <= 15) {
+        if(startingExitId >= 1 && lastExitID <= 15)
+        {
             changeDue = 0;
-        } else {
+        }
+        else
+        {
             var xAxis = changeValue(lastExitID);
             var yAxis = changeValue(startingExitId);
 
@@ -220,7 +228,6 @@ function getTollCost() {
 
             changeDue = document.getElementById('text2')
             changeDue.innerHTML = "Total Cost is: " + change;
-
         }
     }
 }
